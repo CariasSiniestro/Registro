@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ title }} | {{ site_title|default:_('Registro de Alumnos') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Rifa') }}</a></h1>
+{% endblock %}
+
+{% block Persona %}
+<center>
+<form action="rifa/" method="post"> {% csrf_token %} 
+	<h1 id="ganador">El ganador es: {{ Student.first_name }} {{ Student.last_name }}</h1>
+	<h1 id="sid:">Carnet: {{ Student.licence }}</h1>
+    <input type="hidden" value={{ Student.id }} name="id"></input>
+		<select name='Seleccion'>
+			{% for Premios in Prices %}
+ 			<option name='premio' id='premio' value={{ Premios.id }}>{{ Premios.description }}</option> 
+        	{% endfor %}
+		</select>
+
+ <input type="submit" value="Premiar"> 
+
+ </form> 
+
+</center>
+{% endblock %}
+
+
